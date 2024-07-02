@@ -10,17 +10,12 @@ std::vector<std::string> splitExpression(const std::string& expression)
 	std::vector<std::string> result;
 	std::string buffer;
 	int level = 0;
-
 	for (char ch : expression)
 	{
 		if (ch == '(')
-		{
 			level++;
-		}
 		else if (ch == ')')
-		{
 			level--;
-		}
 		else if (ch == '+' && level == 0)
 		{
 			result.push_back(buffer);
@@ -30,65 +25,15 @@ std::vector<std::string> splitExpression(const std::string& expression)
 		buffer += ch;
 	}
 	if (!buffer.empty())
-	{
 		result.push_back(buffer);
-	}
-
 	return result;
 }
-//
-//std::vector<double> calculateExpression(const std::string& expression) 
-//{
-//	std::istringstream iss(expression);
-//	std::vector<double> output;
-//	double num1, num2;
-//	char op;
-//	if (expression.find('*') != std::string::npos)
-//	{
-//		iss >> num1 >> op >> num2;
-//		for (auto it = 0; it < num1; ++it)
-//		{
-//			output.push_back(num2);
-//		}
-//	}
-//	else
-//	{
-//		// 如果没有乘号，直接push数字
-//		output.push_back(stod(expression));
-//	}
-//}
-//
-//std::string multiplyByI(const std::string& expression, int i) 
-//{
-//	std::smatch matches;
-//	// 使用正则表达式匹配表达式中的第一个数字
-//
-//	if (expression.find('*') != std::string::npos)
-//	{
-//		std::regex firstNumberRegex(R"(^\d+)");
-//		if (std::regex_search(expression, matches, firstNumberRegex))
-//		{
-//			// 如果找到数字，将其乘以i
-//			int firstNumber = std::stoi(matches[0]);
-//			std::string multiplied = std::to_string(firstNumber * i);
-//			// 替换表达式中的第一个数字为乘以i后的结果
-//			return std::regex_replace(expression, firstNumberRegex, multiplied);
-//		}
-//	}
-//	else 
-//	{
-//		// 如果没有找到数字，直接在字符串前加上i*
-//		std::string temp = std::to_string(i) + "*" + expression;
-//		return temp;
-//	}
-//}
 
 void parseAndStore(const std::vector<std::string>& subExpressions, std::vector<double>& array)
 {
 	std::regex plainExpr("^(\\d+)([*+])?(\\d+)?$"); // 不带括号的表达式
 	std::regex bracketExpr("^\\((.*)\\)$"); // 带括号但括号外没有数据的表达式
 	std::regex complexExpr("^(\\d+)\\*(\\(.*\\))$"); // 带括号且括号外有数据的表达式
-
 	std::vector<std::string> MoreSub;
 	for (const auto& expr : subExpressions)
 	{
@@ -135,17 +80,11 @@ void parseAndStore(const std::vector<std::string>& subExpressions, std::vector<d
 		{
 			iss >> num1 >> op >> num2;
 			for (auto it = 0; it < num1; ++it)
-			{
 				array.push_back(num2);
-			}
 		}
 		else 
-		{
-			// 如果没有乘号，直接push数字
 			array.push_back(stod(*it));
-		}
 	}
-
 }
 
 //返回每个单跨长度的数组
